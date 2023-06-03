@@ -1,5 +1,5 @@
 """
-URL configuration for project_restro_menu project.
+URL configuration for project_cafe_menu project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app_menus import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('menus/', views.list_menu , name='menu-list'),
+    path('menus/', views.add_menu, name='menu-add')
 ]
