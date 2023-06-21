@@ -5,5 +5,43 @@ MENUS |List
 {%endblock%}
 
 {% block content %}
-<h1> This is the body conent of list page </h1>
+<div class="container">
+    <div class="card p-3 mt-3">
+        <a href="{% url 'menu-add' %}" class="btn btn-sm btn-primary mb-3 mt-3">Add New Menu</a>
+        <div class="card-header">
+            <h1>Menu List</h1>
+            <hr>
+            <table class="table table-hover mt-3">
+                <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for val in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ val.menu_title}}</td>
+                        <td>{{ val.menu_price }}</td>
+                        <td>{{ val.menu_category.category_title }}</td>
+                        <td>
+                            <a href="{% url 'menu-show' val.id %}">Show</a>
+                            <a href="{% url 'menu-edit' val.id %}">Edit</a>
+                            <a href="{% url 'menu-delete' val.id %}">Delete</a>
+                        </td>
+
+                        </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </hr>
+        </div>  
+    </div>
+</div>
+
+
 {% endblock %}
