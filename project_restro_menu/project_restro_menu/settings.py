@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_accounts',
     'app_menus',
-    'app_customers'
+    'app_customers',
+    'app_restapi',
+    'rest_framework',
     
 ]
 
@@ -84,6 +87,22 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default':{
+    #     'ENGINE':'django.db.backends.postgresql',
+    #     'NAME':'restro',
+    #     'HOST':'localhost',   # or 127.0.0.1
+    #     'USER':'postgres',
+    #     'PASSWORD':'1234',
+    #     'PORT': 5432
+    # }
+    # # 'default':{
+    # #     'ENGINE':'django.db.backends.mysql',
+    # #     'NAME':'restro',
+    # #     'HOST':'localhost',   # or 127.0.0.1
+    # #     'USER':'root',
+    # #     'PASSWORD':'',
+    # #     'PORT': 3306
+    # # }
 }
 
 
@@ -122,8 +141,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static' )]
+
+#media configuration
+MEDIA_URL="/media/"
+MEDIA_ROOT=os.path.join(BASE_DIR,",media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#message framework attributes
+MESSAGE_TAGS={
+    messages.ERROR:"danger"
+}
+
+#email configuration
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend" 
+
+EMAIL_HOST ="smtp.gmail.com"       #google email server
+EMAIL_HOST_USER="sakalala669@gmail.com"     #host account email address
+EMAIL_HOST_PASSWORD="xegbjrxohpqnovbt"      #app password generated from gmail account
+
+EMAIL_PORT =587   #port number of TLS
+EMAIL_USE_TLS=True  #using TLS for data encryption
+
